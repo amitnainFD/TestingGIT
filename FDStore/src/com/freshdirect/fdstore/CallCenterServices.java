@@ -1223,6 +1223,7 @@ public class CallCenterServices {
 	
 	public static List getVoidCaptureOrders(String date) throws FDResourceException {
 		System.out.println("Hi");
+		System.out.println("Hi 2");
 		if (callCenterHome == null) {
 			lookupManagerHome();
 		}
