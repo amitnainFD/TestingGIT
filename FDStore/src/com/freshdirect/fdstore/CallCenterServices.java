@@ -1222,6 +1222,7 @@ public class CallCenterServices {
 	}
 	
 	public static List getVoidCaptureOrders(String date) throws FDResourceException {
+		System.out.println("Hi");
 		if (callCenterHome == null) {
 			lookupManagerHome();
 		}
