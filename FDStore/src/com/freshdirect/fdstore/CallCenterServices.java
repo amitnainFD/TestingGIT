@@ -1224,6 +1224,7 @@ public class CallCenterServices {
 	public static List getVoidCaptureOrders(String date) throws FDResourceException {
 		System.out.println("Hi");
 		System.out.println("Hi 2");
+		System.out.println("Hi 3-merge to branch issue-1");
 		if (callCenterHome == null) {
 			lookupManagerHome();
 		}
