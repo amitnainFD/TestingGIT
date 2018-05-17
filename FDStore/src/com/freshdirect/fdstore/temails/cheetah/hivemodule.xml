@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<module id="com.freshdirect.fdstore.temails.cheetah" version="1.0.0">
+
+	<contribution configuration-id="com.freshdirect.temails.Configurations">
+		<templateConfig subsystem="CHEETAH" serviceName="com.freshdirect.fdstore.temails.cheetah.Engine">		
+			<parser class="com.freshdirect.temails.BaseParser" label="Base Parser" xmlTag="BaseParser" order="1"/>			
+			<parser class="com.freshdirect.fdstore.temails.cheetah.CheetahLoopParser" label="Loop Parser" xmlTag="LoopParser" order="2"/>
+		</templateConfig>
+	</contribution>
+	
+	<service-point id="Store" interface="com.freshdirect.temails.TEmailStoreI">
+		<invoke-factory>
+			<construct class="com.freshdirect.temails.XMLTEmailStore">
+				<string>${com.freshdirect.fdstore.templates.cheetah.location}</string>
+				<string>CHEETAH</string>
+				<configuration>com.freshdirect.temails.Configurations</configuration>
+			</construct>
+		</invoke-factory>
+	</service-point>
+	
+	<service-point id="Cache" interface="com.freshdirect.temails.TEmailStoreI">
+		<invoke-factory model="threaded">
+			<construct class="com.freshdirect.temails.TEmailStoreCache">
+				<service>Store</service>					
+			</construct>
+		</invoke-factory>
+	</service-point>
+	
+	<service-point id="Engine" interface="com.freshdirect.temails.TEmailEngineI">
+		<invoke-factory>
+			<construct class="com.freshdirect.temails.TEmailEngineImpl">
+				<service>Cache</service>
+			</construct>
+		</invoke-factory>
+	</service-point>
+
+</module>

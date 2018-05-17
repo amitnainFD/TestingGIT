@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<module id="com.freshdirect.fdstore.rules.promotion" version="1.0.0">
+
+	<contribution configuration-id="com.freshdirect.rules.Configurations">
+		<rulesConfig subsystem="PROMOTION" serviceName="com.freshdirect.fdstore.rules.promotion.Engine">
+			<condition class="com.freshdirect.rules.OgnlCondition" label="OGNL Condition" xmlTag="OgnlCondition"/>
+			<condition class="com.freshdirect.rules.RuleRef" label="Rule Reference" xmlTag="rule-ref"/>
+			<outcome class="java.lang.String" label="Promo Code" xmlTag="PromoCode"/>
+		</rulesConfig>
+	</contribution>
+	
+	<service-point id="Store" interface="com.freshdirect.rules.RulesStoreI">
+		<invoke-factory>
+			<construct class="com.freshdirect.rules.DbRulesStore">
+				<service>com.freshdirect.fdstore.DataSource</service>
+				<string>PROMOTION</string>
+				<configuration>com.freshdirect.rules.Configurations</configuration>
+			</construct>
+		</invoke-factory>
+	</service-point>
+	
+	<service-point id="Cache" interface="com.freshdirect.rules.RulesStoreI">
+		<invoke-factory model="threaded">
+			<construct class="com.freshdirect.rules.RulesStoreCache">
+				<service>Store</service>
+			</construct>
+		</invoke-factory>
+	</service-point>
+	
+	<service-point id="Engine" interface="com.freshdirect.rules.RulesEngineI">
+		<invoke-factory>
+			<construct class="com.freshdirect.rules.RulesEngineImpl">
+				<service>Cache</service>
+			</construct>
+		</invoke-factory>
+	</service-point>
+
+</module>

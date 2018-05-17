@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="src" path="/CMS"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/jsonrpc-1.0.jar"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/jxl.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/scarab-java-client-2.6.jar"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/jtidy-r938.jar"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/jsch-0.1.44.jar"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/poi-3.5-FINAL-20090928.jar"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/aws-java-sdk-1.7.12.jar"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/httpclient-4.5.jar"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/httpcore-4.4.1.jar"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/logistics-data-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/ehcache-2.10.0.jar"/>
+	<classpathentry kind="var" path="FD_LIBS/thirdparty/masterpassExpressSdk.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<module id="com.freshdirect.fdstore" version="1.0.0">
+
+	<!-- expose JVM system properties for symbol substitution -->
+	<contribution configuration-id="hivemind.SymbolSources">
+		<source name="sys" before="*" class="org.apache.hivemind.impl.SystemPropertiesSymbolSource"/>
+	</contribution>
+
+	<!-- expose "classpath:/freshdirect.properties" as a symbol source -->
+	<service-point interface="org.apache.hivemind.SymbolSource" id="fdSymbolSource">
+		<invoke-factory>
+			<construct class="com.freshdirect.framework.conf.PropertiesSymbolSource">
+				<string>classpath:/freshdirect.properties</string>
+			</construct>
+		</invoke-factory>	
+	</service-point>
+	
+	<contribution configuration-id="hivemind.SymbolSources">
+		<source name="rulesProperties" after="sys" service-id="fdSymbolSource"/>
+	</contribution>
+	
+	<service-point id="DataSource" interface="javax.sql.DataSource">
+		<invoke-factory>
+			<construct class="com.freshdirect.framework.conf.JndiDataSource">
+				<string>fddatasource</string>
+			</construct>
+		</invoke-factory>
+	</service-point>
+	
+	<!--
+	<service-point id="DataSource" interface="javax.sql.DataSource">
+		<invoke-factory service-id="hivemind.BuilderFactory">
+			<construct class="oracle.jdbc.pool.OracleConnectionPoolDataSource">
+				<set property="URL" value="jdbc:oracle:thin:@db1.dev.nyc1.freshdirect.com:1521:DBDEV02"/>
+				<set property="user" value="FDSTORE_PRDA"/>
+				<set property="password" value="FDSTORE_PRDA"/>
+			</construct>
+		</invoke-factory>
+	</service-point>
+	-->
+ 	<service-point id="CmsRecommenderService" interface="com.freshdirect.cms.smartstore.CmsRecommenderService">
+ 		<invoke-factory>
+ 			<construct class="com.freshdirect.smartstore.impl.CmsRecommenderServiceImpl">
+ 			</construct>
+ 		</invoke-factory>
+ 	</service-point>
+
+	<!-- APPDEV-2910 Product Grabber Service -->
+ 	<service-point id="GrabberService" interface="com.freshdirect.fdstore.content.grabber.GrabberServiceI">
+ 		<invoke-factory>
+ 			<construct class="com.freshdirect.fdstore.content.browse.grabber.GrabberService">
+ 			</construct>
+ 		</invoke-factory>
+ 	</service-point>
+
+</module>
+

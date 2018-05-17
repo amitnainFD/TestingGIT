@@ -1,0 +1,97 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.freshdirect</groupId>
+	<artifactId>fdstore</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>FDStore</name>
+
+	<parent>
+		<groupId>com.freshdirect</groupId>
+		<artifactId>fdworld</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.metaparadigm</groupId>
+			<artifactId>json-rpc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.ant</groupId>
+			<artifactId>ant</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>jxl</groupId>
+			<artifactId>jxl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.scarabresearch</groupId>
+			<artifactId>scarab-java-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.mastercard</groupId>
+			<artifactId>masterpassExpressSdk</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>weblogic-lib</artifactId>
+			<version>10.3.6</version>
+			<scope>system</scope>
+			<systemPath>${wl.home}/lib/weblogic.jar</systemPath>
+		</dependency>
+
+		<dependency>
+			<groupId>com.freshdirect</groupId>
+			<artifactId>logistics-data</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+		</dependency>
+
+		<!-- internal project dependencies -->
+		<dependency>
+			<groupId>com.freshdirect</groupId>
+			<artifactId>cms</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+</project>

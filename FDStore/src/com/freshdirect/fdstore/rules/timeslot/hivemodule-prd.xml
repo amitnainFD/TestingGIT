@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<module id="com.freshdirect.fdstore.rules.timeslot" version="1.0.0">
+
+	<contribution configuration-id="com.freshdirect.rules.Configurations">
+		<rulesConfig subsystem="TIMESLOT" serviceName="com.freshdirect.fdstore.rules.timeslot.Engine">
+			<condition class="com.freshdirect.rules.OgnlCondition" label="OGNL Condition" xmlTag="OgnlCondition"/>
+			<condition class="com.freshdirect.rules.RuleRef" label="Rule Reference" xmlTag="rule-ref"/>
+			<condition class="com.freshdirect.fdstore.rules.ProfileCondition" label="Profile Value" xmlTag="ProfileCondition"/>
+			<condition class="com.freshdirect.fdstore.rules.OrderAmount" label="Order Amount" xmlTag="OrderAmount"/>
+			<condition class="com.freshdirect.fdstore.rules.ServiceTypeCondition" label="Service Type" xmlTag="serviceType"/>
+			<condition class="com.freshdirect.fdstore.rules.CountyCondition" label="County" xmlTag="County"/>
+			<condition class="com.freshdirect.fdstore.rules.TimeslotCondition" label="Timeslot Condition" xmlTag="TimeslotCondition"/>
+			<outcome class="com.freshdirect.fdstore.rules.BasePrice" label="Base Price" xmlTag="BasePrice"/>
+			<outcome class="com.freshdirect.fdstore.rules.Adjustment" label="Adjustment" xmlTag="Adjustment"/>
+			<outcome class="java.lang.String" label="Order Minimum" xmlTag="orderMinimum"/>
+		</rulesConfig>
+	</contribution>
+	
+	<service-point id="Store" interface="com.freshdirect.rules.RulesStoreI">
+		<invoke-factory>
+			<construct class="com.freshdirect.fdstore.rules.RulesManager">
+				<string>TIMESLOT</string>
+				<configuration>com.freshdirect.rules.Configurations</configuration>
+			</construct>
+		</invoke-factory>
+	</service-point>
+	
+	<service-point id="Cache" interface="com.freshdirect.rules.RulesStoreI">
+		<invoke-factory>
+			<construct class="com.freshdirect.rules.RulesStoreCache">
+				<service>Store</service>
+				<int>5</int>
+			</construct>
+		</invoke-factory>
+	</service-point>
+	
+	<service-point id="Engine" interface="com.freshdirect.rules.RulesEngineI">
+		<invoke-factory>
+			<construct class="com.freshdirect.rules.RulesEngineImpl">
+				<service>Cache</service>
+			</construct>
+		</invoke-factory>
+	</service-point>
+
+</module>

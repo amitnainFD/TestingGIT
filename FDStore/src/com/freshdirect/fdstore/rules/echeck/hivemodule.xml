@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<module id="com.freshdirect.fdstore.rules.echeck" version="1.0.0">
+
+	<contribution configuration-id="com.freshdirect.rules.Configurations">
+		<rulesConfig subsystem="ECHECK" serviceName="com.freshdirect.fdstore.rules.echeck.Engine">
+			<condition class="com.freshdirect.rules.OgnlCondition" label="OGNL Condition" xmlTag="OgnlCondition"/>
+			<condition class="com.freshdirect.rules.RuleRef" label="Rule Reference" xmlTag="rule-ref"/>
+			<condition class="com.freshdirect.fdstore.rules.ProfileCondition" label="Profile Value" xmlTag="ProfileCondition"/>
+			<condition class="com.freshdirect.fdstore.rules.OrderAmount" label="Order Amount" xmlTag="OrderAmount"/>
+			<condition class="com.freshdirect.fdstore.rules.ServiceTypeCondition" label="Service Type" xmlTag="serviceType"/>
+			<condition class="com.freshdirect.fdstore.rules.CountyCondition" label="County" xmlTag="County"/>
+		</rulesConfig>
+	</contribution>
+	
+	<service-point id="Store" interface="com.freshdirect.rules.RulesStoreI">
+		<invoke-factory>
+			<construct class="com.freshdirect.rules.DbRulesStore">
+				<service>com.freshdirect.fdstore.DataSource</service>
+				<string>ECHECK</string>
+				<configuration>com.freshdirect.rules.Configurations</configuration>
+			</construct>
+		</invoke-factory>
+	</service-point>
+	
+	<service-point id="Cache" interface="com.freshdirect.rules.RulesStoreI">
+		<invoke-factory model="threaded">
+			<construct class="com.freshdirect.rules.RulesStoreCache">
+				<service>Store</service>
+			</construct>
+		</invoke-factory>
+	</service-point>
+	
+	<service-point id="Engine" interface="com.freshdirect.rules.RulesEngineI">
+		<invoke-factory>
+			<construct class="com.freshdirect.rules.RulesEngineImpl">
+				<service>Cache</service>
+			</construct>
+		</invoke-factory>
+	</service-point>
+
+</module>

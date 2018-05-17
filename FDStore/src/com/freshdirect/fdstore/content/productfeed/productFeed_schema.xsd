@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified"    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+jaxb:version="2.0">
+<xs:annotation><xs:appinfo> <jaxb:globalBindings>    
+<jaxb:javaType name="java.util.Calendar" xmlType="xs:date" parseMethod="javax.xml.bind.DatatypeConverter.parseDate" 
+printMethod="javax.xml.bind.DatatypeConverter.printDate"/></jaxb:globalBindings> </xs:appinfo></xs:annotation>
+
+<xs:element name="products">
+<xs:complexType>	
+<xs:sequence> 
+	<xs:element name="product" maxOccurs="unbounded" minOccurs="1">
+		
+	<xs:complexType>
+			<xs:sequence>				
+				<xs:element name="attributes" type="attributes"  maxOccurs="1" minOccurs="0"/>
+				<xs:element name="prices" type="prices" maxOccurs="1" minOccurs="0"/>
+				<xs:element name="groupPrices" type="groupPrices" maxOccurs="1" minOccurs="0"/>
+				<xs:element name="saleUnits" type="saleUnits" maxOccurs="1" minOccurs="0" />
+				<xs:element name="nutritionInfo" type="nutritionInfo" maxOccurs="1" minOccurs="0" />
+				<xs:element name="configurations" type="configurations"  maxOccurs="1" minOccurs="0"/>				
+				<xs:element name="ratings" type="ratings"  maxOccurs="1" minOccurs="0"/>				
+				<xs:element name="inventories" type="inventories"  maxOccurs="1" minOccurs="0"/>
+				<xs:element name="images" type="images"  maxOccurs="1" minOccurs="0"/>
+			</xs:sequence>
+
+			<xs:attribute name="skuCode" type="xs:string" use="required"/> 
+			<xs:attribute name="upc" type="xs:string" use="required" /> 
+			<xs:attribute name="materialNum" type="xs:string" use="required" />			  
+			<xs:attribute name="prodId" type="xs:string" use="required"/>
+			<xs:attribute name="prodName" type="xs:string" use="required"/> 
+			<xs:attribute name="prodUrl" type="xs:string" /> 
+			<xs:attribute name="catId" type="xs:string" /> 
+			<xs:attribute name="subCatId" type="xs:string" />			
+			<xs:attribute name="parentCatId" type="xs:string" /> 
+			<xs:attribute name="rootCatId" type="xs:string" />   
+			<xs:attribute name="deptId" type="xs:string" /> 
+			<xs:attribute name="prodStatus" type="xs:string" />
+			<xs:attribute name="minQuantity" type="xs:string" />
+			<xs:attribute name="maxQuantity" type="xs:string" />
+			<xs:attribute name="qtyIncrement" type="xs:string" />
+			
+
+			
+	</xs:complexType>
+	</xs:element>
+</xs:sequence> 
+</xs:complexType>
+</xs:element>
+
+<xs:complexType  name="zone" >
+<xs:sequence>
+<xs:element type="xs:string" name="zoneCode"  />
+<xs:element type="xs:string" name="zips" maxOccurs="1" minOccurs="1" />
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="prices" >	
+<xs:sequence>
+	<xs:element name="price" maxOccurs="unbounded" minOccurs="0">
+	<xs:complexType>
+	<xs:sequence>
+
+	<xs:element name="zoneCode" type="xs:string" />
+
+
+	<xs:element type="xs:decimal" name="unitPrice" />
+	<xs:element type="xs:string" name="unitDescription" />
+	<xs:element type="xs:string" name="unitWeight" />
+	<xs:element type="xs:string" name="scaleQuantity" />
+	<xs:element type="xs:decimal" name="salePrice" maxOccurs="1" minOccurs="0" />
+
+	<xs:element type="xs:date" name="saleStartTime" maxOccurs="1" minOccurs="0" />
+	<xs:element type="xs:date" name="saleEndTime" maxOccurs="1" minOccurs="0" />
+	</xs:sequence>
+	</xs:complexType>
+	</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="groupPrices" >
+<xs:sequence>
+<xs:element name="groupPrice" maxOccurs="unbounded" minOccurs="0">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="zoneCode" type="xs:string" />
+			<xs:element type="xs:string" name="groupMaterials" maxOccurs="1" minOccurs="1" />
+			
+			<xs:element type="xs:decimal" name="unitPrice" />
+			
+			<xs:element type="xs:string" name="unitWeight" />
+			<xs:element type="xs:string" name="groupQuantity" />									
+		</xs:sequence>
+			<xs:attribute type="xs:string" name="groupId" use="required"/>
+			<xs:attribute type="xs:string" name="groupDesc" use="required"/>
+		
+	</xs:complexType>
+</xs:element>	
+</xs:sequence>
+</xs:complexType>
+
+
+<xs:complexType name="saleUnits" >
+<xs:sequence>
+<xs:element name="saleUnit" maxOccurs="unbounded" minOccurs="0">
+	<xs:complexType>
+		<xs:sequence>	
+			<xs:element type="xs:string" name="name" maxOccurs="1" minOccurs="1" />
+			<xs:element type="xs:string" name="baseUnit" maxOccurs="1" minOccurs="1" />
+			<xs:element type="xs:string" name="estimatedWeight" maxOccurs="1" minOccurs="0" />
+			<xs:element type="xs:string" name="description" maxOccurs="1" minOccurs="1" />									
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+				
+<xs:complexType name="nutritionInfo" >
+<xs:sequence>
+<xs:element name="nutrition" maxOccurs="unbounded" minOccurs="0">
+	<xs:complexType>
+		
+			<xs:attribute type="LimitedString255" name="nutritionType" use="required" />
+			<xs:attribute type="LimitedString50" name="uom" use="required" />
+			<xs:attribute type="Decimal10-2" name="value" use="required" />									
+		
+	</xs:complexType>
+</xs:element>	
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="configurations">
+<xs:sequence>
+	<xs:element name="configuration" maxOccurs="unbounded" minOccurs="0">
+	<xs:complexType>
+	<xs:sequence>
+		<xs:element name="variationOption" maxOccurs="unbounded" minOccurs="0">
+			<xs:complexType>
+			<xs:sequence>									
+				<xs:element name="charValueName" type="LimitedString30" />			  
+				<xs:element name="charValueDesc" type="LimitedString40" />
+				<xs:element type="xs:decimal" name="price" />		
+				<xs:element type="xs:string" name="pricingUnit" />		
+			</xs:sequence>
+			
+			</xs:complexType>
+		</xs:element>
+	</xs:sequence>
+	<xs:attribute type="xs:string" name="charName" />
+	</xs:complexType>
+
+	</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ratings">
+<xs:sequence>
+	<xs:element name="rating" maxOccurs="unbounded" minOccurs="0">
+		<xs:complexType>
+			<xs:sequence>	
+				<xs:element type="xs:string" name="ratingType" />
+				<xs:element type="xs:string" name="desc" minOccurs="0"/>
+				<xs:element type="xs:string" name="value" />									
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="attributes">
+<xs:sequence>
+	<xs:element name="prodAttribute" maxOccurs="unbounded" minOccurs="0">
+		<xs:complexType>
+			<xs:sequence>	
+				<xs:element type="xs:string" name="attrName" />
+				<xs:element type="xs:string" name="attrDesc" minOccurs="0" maxOccurs="1"/>
+				<xs:element type="xs:string" name="attrValue" />									
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:sequence>
+</xs:complexType>
+			
+<xs:complexType name="inventories">
+<xs:sequence>
+	<xs:element name="inventory" maxOccurs="unbounded" minOccurs="0">
+		<xs:complexType>
+			<xs:sequence>	
+				<xs:element type="xs:date" name="startDate" />
+				<xs:element type="xs:string" name="quantity" />									
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="images">
+<xs:sequence>
+	<xs:element name="image" maxOccurs="unbounded" minOccurs="0">
+		<xs:complexType>
+			<xs:attribute type="xs:string" name="imgType" use="required"/>
+			<xs:attribute type="xs:string" name="imgUrl" use="required"/>									
+		</xs:complexType>
+	</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="Decimal10-2">
+    <xs:restriction base="xs:decimal">
+      <xs:maxInclusive value="9999999999"/>
+      <xs:fractionDigits value="2"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="LimitedString50">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="50" />
+    </xs:restriction>
+  </xs:simpleType>
+   <xs:simpleType name="LimitedString30">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="30" />
+    </xs:restriction>
+  </xs:simpleType>
+   <xs:simpleType name="LimitedString40">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="40" />
+    </xs:restriction>
+  </xs:simpleType>
+    <xs:simpleType name="LimitedString255">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+
+
+						
